@@ -30,24 +30,15 @@ static void Part2(int[] moves)
     var count = 0;
     foreach (var move in moves)
     {
-        Console.WriteLine($"CURRENT POSITION: {currentPos}, MOVE: {move}");
+        count += Math.Abs(move / 100);
 
-        var nextPos = currentPos + move;
+        var nextPos = currentPos + (move % 100);
         if ((nextPos <= 0 || nextPos >= 100) && currentPos != 0)
         {
             count += 1;
-            Console.WriteLine("COUNT +1");
         }
 
-        var absoluteMove = Math.Abs(move);
-
-        if (absoluteMove > 100)
-        {
-            count += absoluteMove / 100;
-            Console.WriteLine($"COUNT +{absoluteMove / 100}");
-        }
-
-        currentPos = Mod(currentPos + move, 100);
+        currentPos = Mod(nextPos, 100);
     }
 
     Console.WriteLine(count);
